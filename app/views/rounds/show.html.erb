@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @round.name %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @round.location %>
+</p>
+
+<p>
+  <b>Price range:</b>
+  <%= @round.price_range %>
+</p>
+
+<p>
+  <b>Restaurant type:</b>
+  <%= @round.restaurant_type %>
+</p>
+
+<p>
+  <b>Decision:</b>
+  <%= @round.decision %>
+</p>
+
+<p>
+  <b>Encrypted url:</b>
+  <%= @round.encrypted_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_round_path(@round) %> |
+<%= link_to 'Back', rounds_path %>

@@ -1,0 +1,33 @@
+<h1>Listing rounds</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Price range</th>
+    <th>Restaurant type</th>
+    <th>Decision</th>
+    <th>Encrypted url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rounds.each do |round| %>
+  <tr>
+    <td><%= round.name %></td>
+    <td><%= round.location %></td>
+    <td><%= round.price_range %></td>
+    <td><%= round.restaurant_type %></td>
+    <td><%= round.decision %></td>
+    <td><%= round.encrypted_url %></td>
+    <td><%= link_to 'Show', round %></td>
+    <td><%= link_to 'Edit', edit_round_path(round) %></td>
+    <td><%= link_to 'Destroy', round, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Round', new_round_path %>
