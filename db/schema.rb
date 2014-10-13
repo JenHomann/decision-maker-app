@@ -11,6 +11,45 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20141013204056) do
+
+  create_table "contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "email"
+    t.boolean  "voted?"
+    t.string   "encrypted_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "options", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.integer  "score"
+    t.integer  "round_id"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "rounds", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "price_range"
+    t.string   "restaurant_type"
+    t.string   "decision"
+    t.string   "encrypted_url"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "points"
+    t.integer  "contact_id"
+    t.integer  "option_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end
