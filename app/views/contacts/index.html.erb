@@ -5,7 +5,7 @@
     <th>Name</th>
     <th>Phone</th>
     <th>Email</th>
-    <th>Voted?</th>
+    <th>Voted</th>
     <th>Encrypted</th>
     <th></th>
     <th></th>
@@ -17,7 +17,7 @@
     <td><%= contact.name %></td>
     <td><%= contact.phone %></td>
     <td><%= contact.email %></td>
-    <td><%= contact.voted? %></td>
+    <td><%= contact.voted %></td>
     <td><%= contact.encrypted_id %></td>
     <td><%= link_to 'Show', contact %></td>
     <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
