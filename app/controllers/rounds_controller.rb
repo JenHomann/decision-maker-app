@@ -32,11 +32,6 @@ class RoundsController < ApplicationController
     end
   end
 
-  # GET /rounds/1/edit
-  def edit
-    @round = Round.find(params[:id])
-  end
-
   # POST /rounds
   # POST /rounds.json
   def create
@@ -53,22 +48,6 @@ class RoundsController < ApplicationController
     end
   end
 
-  # PUT /rounds/1
-  # PUT /rounds/1.json
-  def update
-    @round = Round.find(params[:id])
-
-    respond_to do |format|
-      if @round.update_attributes(params[:round])
-        format.html { redirect_to @round, notice: 'Round was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @round.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /rounds/1
   # DELETE /rounds/1.json
   def destroy
@@ -80,4 +59,8 @@ class RoundsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def confirmation
+  end
+    
 end
