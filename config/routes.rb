@@ -1,14 +1,25 @@
 DecisionMakerApp::Application.routes.draw do
-  resources :contacts
-
-
-  resources :votes
-
-
-  resources :options
-
-
-  resources :rounds
+ 
+  # root :to => 'pages#home'
+  
+  get '/home' => 'pages#home', as: 'home'
+  
+  get '/start' => 'rounds#new', as: 'start'
+  
+  # TODO: update views
+  post '/rounds' => 'rounds#create'
+  post '/options' => 'options#create'
+  
+  get '/contacts' => 'contacts#new', as: 'new_contact'
+  post '/contacts' => 'contacts#create'
+  
+  get '/votes/:encrypted_id' => 'votes#new'
+  post '/votes' => 'votes#create'
+  get '/rounds/confirmation' => 'rounds#confirmation', as: 'confirm_round'
+  get '/rounds/:encrypted_url' => 'rounds#show', as: 'round'
+  
+  
+  # get '/new/:id/task' => 'tasks#new', as: 'org_task'
 
 
   # The priority is based upon order of creation:
