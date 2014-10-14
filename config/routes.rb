@@ -5,6 +5,7 @@ DecisionMakerApp::Application.routes.draw do
   get '/home' => 'pages#home', as: 'home'
   
   get '/start' => 'rounds#new', as: 'start'
+  post '/initial_contact' => 'contacts#initial', as 'initial_contact'
   
   # TODO: update views
   post '/rounds' => 'rounds#create'

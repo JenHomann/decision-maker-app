@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
 
+  # Initial user inputs contact information
   def home
     @contact = Contact.new
-    @round = Round.new
   end
 
 end

@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  
   # GET /contacts/new
   # GET /contacts/new.json
   def new
@@ -7,6 +8,17 @@ class ContactsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @contact }
+    end
+  end
+
+  # POST /initial_contact
+  def initial
+    @contact = Contact.create(params[:contact])
+    
+    if @contact.save
+      redirect_to new_round_path, :notice => "Email has been successfully saved."
+    else
+      render start_path
     end
   end
 
