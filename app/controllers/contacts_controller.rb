@@ -16,9 +16,9 @@ class ContactsController < ApplicationController
     @contact = Contact.create(params[:contact])
     
     if @contact.save
-      redirect_to new_round_path, :notice => "Email has been successfully saved."
+      redirect_to start_path, :notice => "Email has been successfully saved."
     else
-      render start_path
+      render "home"
     end
   end
 
