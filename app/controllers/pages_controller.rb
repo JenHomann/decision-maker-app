@@ -77,10 +77,12 @@ class PagesController < ApplicationController
     @contact.set_encrypted_id
     @round.contacts << @contact
     @initial_contact_id = session[:initial_contact_id]
+    @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
   
     respond_to do |format|
       if @contact.save
         ContactMailer.send_vote(@contact).deliver
+        ContactMailer.confirm(@initial_contact).deliver
         format.html { redirect_to vote_path(@initial_contact_id), notice: 'Contact was successfully created.' }
         format.json { render json: @contact, status: :created, location: @contact }
       else
@@ -120,6 +122,9 @@ class PagesController < ApplicationController
   #get
   def confirm
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
+    @round.contacts.each do |contact|
+      ContactMailer.decision(contact).deliver
+    end
   end
   
   def show_round
