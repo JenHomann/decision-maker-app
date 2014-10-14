@@ -1,9 +1,9 @@
 class ContactMailer < ActionMailer::Base
-  default :from => ENV['EMAIL']
+  default :from => ENV['USERNAME']
   
   def send_vote(contact)
-    @round = contact.round
     @contact = contact
+    @round = @contact.round
     mail(:to => "#{contact.name} <#{contact.email}>", :subject => "Grupl: Cast your vote!")
   end
   

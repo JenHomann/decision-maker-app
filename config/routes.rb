@@ -8,7 +8,7 @@ DecisionMakerApp::Application.routes.draw do
   post '/initial_contact' => 'pages#initial_contact', as: 'initial_contact'
   
   post '/new_round' => 'pages#new_round', as: 'new_round'
-  post '/set_options' => 'pages#set_options', as: 'set_options'
+  post '/set_options/:encrypted_url' => 'pages#set_options', as: 'set_options'
   
   get '/round/:encrypted_url/new_contacts' => 'pages#new_contacts', as: 'new_contacts' # don't forget to pass the encrypted_url
   post '/round/:encrypted_url/create_contacts' => 'pages#create_contacts', as: 'create_contacts' # don't forget to pass the encrypted_url
