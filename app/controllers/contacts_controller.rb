@@ -41,6 +41,8 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(params[:contact])
+    #TODO update mailer when ready, and test
+    # ContactMailer.send_vote(@contact).deliver
 
     respond_to do |format|
       if @contact.save
