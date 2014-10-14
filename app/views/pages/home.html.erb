@@ -1,4 +1,6 @@
-<h1>HOME</h1>
+<h1>Grupl It!</h1>
+
+<p>Enter in your phone and/or email address to get started:</p>
 
 <%= form_for(@contact) do |c| %>
   <% if @contact.errors.any? %>
@@ -24,4 +26,5 @@
   <div class="actions">
     <%= c.submit "Submit" %>
   </div>
+  
 <% end %>
