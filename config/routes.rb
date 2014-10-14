@@ -11,7 +11,7 @@ DecisionMakerApp::Application.routes.draw do
   get '/contacts' => 'contacts#new', as: 'new_contact'
   post '/contacts' => 'contacts#create', as: 'create_contact'
   
-  get '/votes/:encrypted_id' => 'votes#show', as: 'vote'
+  get '/votes/:encrypted_id' => 'votes#new', as: 'new_vote'
   post '/votes/:encrypted_id' => 'votes#create', as: 'create_vote'
   get '/rounds/:encrypted_url/confirmation' => 'rounds#confirmation', as: 'confirm_round'
   get '/rounds/:encrypted_url' => 'rounds#show', as: 'round'
