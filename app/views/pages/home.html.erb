@@ -1,20 +1,18 @@
 <h1>HOME</h1>
 
-<%= form_for(@round) do |f| %>
-  <% if @round.errors.any? %>
+<%= form_for(@contact) do |c| %>
+  <% if @contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@round.errors.count, "error") %> prohibited this vote from being saved:</h2>
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this vote from being saved:</h2>
 
       <ul>
-      <% @round.errors.full_messages.each do |msg| %>
+      <% @contact.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-
-<%= f.fields_for :contact do |c | %>
   <div class="field">
     <%= c.label :email %><br />
     <%= c.number_field :email %>
@@ -23,11 +21,7 @@
     <%= c.label :phone %><br />
     <%= c.number_field :phone %>
   </div>
-  <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= c.submit "Submit" %>
   </div>
 <% end %>
-
-
-<%= link_to "START", start_path %>
