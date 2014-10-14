@@ -1,14 +1,8 @@
 DecisionMakerApp::Application.routes.draw do
-  resources :contacts
-
-
-  resources :votes
-
-
-  resources :options
-
-
-  resources :rounds
+ 
+  root :to => 'pages#home'
+  
+  
 
 
   # The priority is based upon order of creation:
