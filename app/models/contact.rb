@@ -1,6 +1,9 @@
 class Contact < ActiveRecord::Base
   attr_accessible :email, :encrypted_id, :name, :phone, :voted
   
+  belongs_to :rounds
+  has_many :votes
+  
   require 'securerandom'
   
   # Sets the encrypted_id
