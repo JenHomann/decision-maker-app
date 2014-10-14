@@ -36,8 +36,8 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @round.save
-         @option = Option.create(name: "Option A")
-         @option.round = @round
+        @option = Option.new_options
+        @option.round = @round
         format.html { redirect_to new_contacts_path(@round.encrypted_url), notice: 'Round was successfully created.' }
         format.json { render json: @round, status: :created, location: @round }
       else
