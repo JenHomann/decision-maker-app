@@ -1,3 +1,30 @@
-<h1>HOME</h1>
+<h1>Grupl It!</h1>
 
-<%= link_to "START", start_path %>
+<p>Enter in your phone and/or email address to get started:</p>
+
+<%= form_for(@contact, method: :post, url: initial_contact_path) do |c| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this vote from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= c.label :email %><br />
+    <%= c.text_field :email %>
+  </div>
+  <div class="field">
+    <%= c.label :phone %><br />
+    <%= c.text_field :phone %>
+  </div>
+  <div class="actions">
+    <%= c.submit "Submit" %>
+  </div>
+  
+<% end %>
