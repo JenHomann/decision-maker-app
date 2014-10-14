@@ -1,19 +1,21 @@
 DecisionMakerApp::Application.routes.draw do
  
-  root :to => 'pages#home'
+  # root :to => 'pages#home'
+  
+  get '/home' => 'pages#home', as: 'home'
   
   get '/start' => 'rounds#new', as: 'start'
   
   # TODO: update views
-  post '/rounds' => 'rounds#create', as: 'create_round'
-  post '/options' => 'options#create', as: 'create_option'
+  post '/rounds' => 'rounds#create'
+  post '/options' => 'options#create'
   
   get '/contacts' => 'contacts#new', as: 'new_contact'
-  post '/contacts' => 'contacts#create', as: 'create_contact'
+  post '/contacts' => 'contacts#create'
   
-  get '/votes/:encrypted_id' => 'votes#new', as: 'new_vote'
-  post '/votes/:encrypted_id' => 'votes#create', as: 'create_vote'
-  get '/rounds/:encrypted_url/confirmation' => 'rounds#confirmation', as: 'confirm_round'
+  get '/votes/:encrypted_id' => 'votes#new'
+  post '/votes' => 'votes#create'
+  get '/rounds/confirmation' => 'rounds#confirmation', as: 'confirm_round'
   get '/rounds/:encrypted_url' => 'rounds#show', as: 'round'
   
   

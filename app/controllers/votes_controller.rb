@@ -2,8 +2,8 @@ class VotesController < ApplicationController
 
   # GET /votes/1
   # GET /votes/1.json
-  def show
-    @vote = Vote.find(params[:id])
+  def new
+    @vote = Vote.new
 
     respond_to do |format|
       format.html # show.html.erb
