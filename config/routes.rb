@@ -4,20 +4,20 @@ DecisionMakerApp::Application.routes.draw do
   
   get '/home' => 'pages#home', as: 'home'
   
-  get '/start' => 'rounds#new', as: 'start'
-  post '/initial_contact' => 'contacts#initial', as: 'initial_contact'
+  get '/start' => 'pages#start', as: 'start'
+  post '/initial_contact' => 'pages#initial_contact', as: 'initial_contact'
   
-  # TODO: update views
-  post '/rounds' => 'rounds#create'
-  post '/options' => 'options#create'
+  post '/new_round' => 'pages#new_round', as: 'new_round'
+  post '/set_options' => 'pages#set_options', as: 'set_options'
   
-  get '/contacts' => 'contacts#new', as: 'new_contact'
-  post '/contacts' => 'contacts#create'
+  get '/round/:encrypted_url/new_contacts' => 'pages#new_contacts', as: 'new_contacts' # don't forget to pass the encrypted_url
+  post '/round/:encrypted_url/create_contacts' => 'pages#create_contacts', as: 'create_contacts' # don't forget to pass the encrypted_url
   
-  get '/votes/:encrypted_id' => 'votes#new'
-  post '/votes' => 'votes#create'
-  get '/rounds/confirmation' => 'rounds#confirmation', as: 'confirm_round'
-  get '/rounds/:encrypted_url' => 'rounds#show', as: 'round'
+  get '/vote/:encrypted_id' => 'pages#vote', as: 'vote' # don't forget to pass the encrypted_id
+  post '/vote/:encrypted_id' => 'pages#create_vote', as: 'create_vote' # don't forget to pass the encrypted_id
+  
+  get '/confirmation/:encrypted_url' => 'pages#confirm', as: 'confirm' # don't forget to pass the encrypted_url
+  get '/round/:encrypted_url' => 'pages#show_round', as: 'show_round' # don't forget to pass the encrypted_url
   
   
   # get '/new/:id/task' => 'tasks#new', as: 'org_task'

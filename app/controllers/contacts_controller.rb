@@ -13,7 +13,7 @@ class ContactsController < ApplicationController
 
   # POST /initial_contact
   def initial
-    @contact = Contact.create(params[:contact])
+    @contact = Contact.new(params[:contact])
     
     if @contact.save
       redirect_to start_path, :notice => "Email has been successfully saved."
@@ -25,12 +25,15 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
+    raise "#{params}"
     @contact = Contact.new(params[:contact])
-    #TODO update mailer when ready, and test
-    # ContactMailer.send_vote(@contact).deliver
-
+    @round = Round.find_by_encrypted_url(params[:encrypted_url])
+    
     respond_to do |format|
       if @contact.save
+        @contact.set_encrypted_id
+        @round.contact << @contact
+        ContactMailer.send_vote(@contact).deliver
         format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
         format.json { render json: @contact, status: :created, location: @contact }
       else

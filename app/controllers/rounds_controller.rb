@@ -36,10 +36,16 @@ class RoundsController < ApplicationController
   # POST /rounds.json
   def create
     @round = Round.new(params[:round])
+    
+    # yelp_array = Yelp -- (whatever it returns)
+    # yelp_array.each do |yelp_data|
+    #   Option.create(yelp_data)
+    # end
 
     respond_to do |format|
       if @round.save
-        format.html { redirect_to @round, notice: 'Round was successfully created.' }
+         @round.set_encrypted_url
+        format.html { redirect_to new_contact_path, notice: 'Round was successfully created.' }
         format.json { render json: @round, status: :created, location: @round }
       else
         format.html { render action: "new" }
@@ -62,5 +68,16 @@ class RoundsController < ApplicationController
   
   def confirmation
   end
+  
+  # def new_contact
+  #   raise "#{params}"
+  #   @contact = Contact.new
+  #   @round = Round.find_by_encrypted_url(params[:encrypted_url])
+  #
+  #   respond_to do |format|
+  #     format.html # new.html.erb
+  #     format.json { render json: @contact }
+  #   end
+  # end
     
 end
