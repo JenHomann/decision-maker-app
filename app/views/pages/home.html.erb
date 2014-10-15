@@ -2,33 +2,40 @@
   Grupl It!
 <% end %>
 
-<h1>Grupl It!</h1>
+<div class="row">
+  <div class="large-4 medium-6 column">
+    
+    <h1>Grupl It!</h1>
 
-<p>Enter in your phone and/or email address to get started:</p>
+    <p>Enter in your phone and/or email address to get started:</p>
 
-<%= form_for(@contact, method: :post, url: initial_contact_path) do |c| %>
-  <% if @contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this vote from being saved:</h2>
+    <%= form_for(@contact, method: :post, url: initial_contact_path) do |c| %>
+      <% if @contact.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this vote from being saved:</h2>
 
-      <ul>
-      <% @contact.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+          <ul>
+          <% @contact.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= c.label :email %><br />
-    <%= c.text_field :email %>
-  </div>
-  <div class="field">
-    <%= c.label :phone %><br />
-    <%= c.text_field :phone %>
-  </div>
-  <div class="actions">
-    <%= c.submit "Submit" %>
-  </div>
+      <div class="field">
+        <%= c.label :email %><br />
+        <%= c.text_field :email %>
+      </div>
+      <div class="field">
+        <%= c.label :phone %><br />
+        <%= c.text_field :phone %>
+      </div>
+      <div class="actions">
+        <%= c.submit "Submit", class: "button" %>
+      </div>
   
-<% end %>
+    <% end %>
+    
+  </div>
+</div>
+
