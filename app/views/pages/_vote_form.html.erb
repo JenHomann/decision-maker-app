@@ -1,3 +1,6 @@
+<div class="row">
+  <div class="medium-6 column">
+
 <%= form_for(@vote, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
   <% if @vote.errors.any? %>
     <div id="error_explanation">
@@ -13,17 +16,20 @@
 
   <div class="field">
     <%= f.label :points %><br />
-    <%= f.number_field :points %>
+    <%= f.text_field :points %>
   </div>
   <div class="field">
     <%= f.label :contact_id %><br />
-    <%= f.number_field :contact_id %>
+    <%= f.text_field :contact_id %>
   </div>
   <div class="field">
     <%= f.label :option_id %><br />
-    <%= f.number_field :option_id %>
+    <%= f.text_field :option_id %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", class: "button" %>
   </div>
 <% end %>
+
+  </div>
+</div>
