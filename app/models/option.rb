@@ -4,10 +4,16 @@ class Option < ActiveRecord::Base
   belongs_to :round
   has_many :votes
   
+  accepts_nested_attributes_for :votes, :allow_destroy => true
+  
   def self.create_options(location, term, round_id)
     @options = Yelp.client.search(location, {term: term})
     @options.businesses.each do |option|
-      Option.create(name: option.name, image: option.image_url, url: option.url, round_id: round_id)
+      o = Option.create(name: option.name, url: option.url, round_id: round_id)
+      if option.has_key?("image_url")
+        o.update_attributes(:image => option.image_url)
+        o.save
+      end
     end
   end
   

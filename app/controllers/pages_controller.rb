@@ -71,8 +71,17 @@ class PagesController < ApplicationController
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @contact.set_encrypted_id
     @round.contacts << @contact
+    
+    @options = @round.options
+    @options.each do |o|
+      Vote.create(option_id: o.id, contact_id: @contact.id)
+    end
+    
     @initial_contact_id = session[:initial_contact_id]
     @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
+    @options.each do |o|
+      Vote.create(option_id: o.id, contact_id: @initial_contact_id)
+    end
 
     respond_to do |format|
       if @contact.save
@@ -103,7 +112,7 @@ class PagesController < ApplicationController
 
   # post
   def create_vote
-    raise "#{params}"
+    binding.pry
     @vote = Vote.new(params[:vote])
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
     

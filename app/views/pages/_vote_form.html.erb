@@ -1,24 +1,19 @@
 <div class="row">
   <div class="medium-6 column">
 
-<%= form_for(@vote, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
-  <% if @vote.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@vote.errors.count, "error") %> prohibited this vote from being saved:</h2>
-
-      <ul>
-      <% @vote.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(@options, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
+  
   <% @options.each do |option| %>
     <p><%= link_to(option.name, option.url) %></p>
-    <p><%= image_tag(option.image) %></br>
-    <%= f.check_box(:response, {value: option.name}, "yes", "no")%> <-- check for yes</p>
+    <p><% if option.image %>
+          <%= image_tag(option.image) %></br>
+        <% end %>
+    </p>
+    <%= f.fields_for :votes do |v| %>
+      <%= v.check_box(:response, {value: option.name}, "yes", "no") %> <-- check to vote yes
     <% end %>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
