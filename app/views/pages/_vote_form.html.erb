@@ -1,3 +1,6 @@
+<div class="row">
+  <div class="medium-6 column">
+
 <%= form_for(@vote, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
   <% if @vote.errors.any? %>
     <div id="error_explanation">
