@@ -3,14 +3,21 @@
 
 nav.top-bar {
 text-align:center;
+background-color: #105469;
 }
 
 section.top-bar-section {
 display: inline-block;
+background-color: #105469;
+}
+
+.top-bar-section ul li {
+background-color: #105469;
 }
 
 .name a{
   text-decoration: none;
   font-family: 'Rammetto One', cursive;
   font-size: 1.85em;
+  background-color: #105469;
 }
