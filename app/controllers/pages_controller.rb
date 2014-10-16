@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
   
   #post
+  # initiates initial contact object
   def initial_contact
     @contact = Contact.new(params[:contact])
     @contact.set_encrypted_id
@@ -20,6 +21,7 @@ class PagesController < ApplicationController
   end
   
   #get
+  # initial contact inputs search data
   def start
     @round = Round.new
 
@@ -30,14 +32,18 @@ class PagesController < ApplicationController
   end
   
   #post
+  # search data is stored in a new instance of a round Object
+  # Options are returned from Yelp using params[:round]
   def new_round
     @round = Round.new(params[:round])
     @round.set_encrypted_url
 
     respond_to do |format|
       if @round.save
-        @option = Option.new_options
-        @option.round = @round
+        @contact = Contact.find_by_encrypted_id(session[:initial_contact_id])
+        @round.contacts << @contact
+        binding.pry
+        Option.create_options(params[:round][:location], params[:round][:restaurant_type], @round.id)
         format.html { redirect_to new_contacts_path(@round.encrypted_url), notice: 'Round was successfully created.' }
         format.json { render json: @round, status: :created, location: @round }
       else
@@ -78,6 +84,7 @@ class PagesController < ApplicationController
     @round.contacts << @contact
     @initial_contact_id = session[:initial_contact_id]
     @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
+    binding.pry
   
     respond_to do |format|
       if @contact.save
@@ -92,10 +99,13 @@ class PagesController < ApplicationController
     end
   end
 
-  #get
+  # get
   def vote
+    binding.pry
     @vote = Vote.new
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
+    @round = @contact.round
+    @options = @round.options
     
     respond_to do |format|
       format.html # new.html.erb

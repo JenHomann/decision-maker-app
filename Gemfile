@@ -44,4 +44,4 @@ gem 'unicorn'
 # To use debugger
 # gem 'debugger'
 
-gem 'yelp', require: 'yelp'
+gem 'yelp'
