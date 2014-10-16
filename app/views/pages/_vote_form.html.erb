@@ -9,7 +9,7 @@
           <%= image_tag(option.image) %></br>
         <% end %>
     </p>
-    <%= f.fields_for :vote do |v| %>
+    <%= f.fields_for :votes do |v| %>
       <%= v.check_box(:response, {value: option.name}, "yes", "no") %> <-- check for yes
     <% end %>
   <% end %>
