@@ -7,7 +7,7 @@
     
     <h1>Grupl It!</h1>
 
-    <p>Enter in your phone and/or email address to get started:</p>
+    <p>Enter in your phone <!-- and/or email address  -->to get started:</p>
 
     <%= form_for(@contact, method: :post, url: initial_contact_path) do |c| %>
       <% if @contact.errors.any? %>
