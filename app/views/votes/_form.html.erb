@@ -18,7 +18,7 @@ d<%= form_for(@vote) do |f| %>
   <% vote = Vote.new %>
  
   <div class="actions">
-    <%= option.submit %>
+    <%= option.submit "Submit", class: "button radius" %>
   </div>
 <% end %>
 
