@@ -23,6 +23,10 @@
       <% end %>
 
       <div class="field">
+        <%= c.label :name %><br />
+        <%= c.text_field :name %>
+      </div>
+      <div class="field">
         <%= c.label :email %><br />
         <%= c.text_field :email %>
       </div>
@@ -33,6 +37,7 @@
       <div class="actions">
         <%= c.submit "Go!", class: "button radius" %>
       </div>
+
   
     <% end %>
     

@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
   
   #post
+  # initiates initial contact object
   def initial_contact
     @contact = Contact.new(params[:contact])
     @contact.set_encrypted_id
@@ -20,6 +21,7 @@ class PagesController < ApplicationController
   end
   
   #get
+  # initial contact inputs search data
   def start
     @round = Round.new
 
@@ -30,14 +32,17 @@ class PagesController < ApplicationController
   end
   
   #post
+  # search data is stored in a new instance of a round Object
+  # Options are returned from Yelp using params[:round]
   def new_round
     @round = Round.new(params[:round])
     @round.set_encrypted_url
 
     respond_to do |format|
       if @round.save
-         @option = Option.create(name: "Option A")
-         @option.round = @round
+        @contact = Contact.find_by_encrypted_id(session[:initial_contact_id])
+        @round.contacts << @contact
+        Option.create_options(params[:round][:location], params[:round][:restaurant_type], @round.id)
         format.html { redirect_to new_contacts_path(@round.encrypted_url), notice: 'Round was successfully created.' }
         format.json { render json: @round, status: :created, location: @round }
       else
@@ -46,20 +51,9 @@ class PagesController < ApplicationController
       end
     end
   end
-  
-  # #post
-  # def set_options
-  #   @option = Option.create(name: "Option A")
-  #   @option.round = Round.find_by_encrypted_url(params[:encrypted_url])
-  #
-  #   render new_contacts_path(@option.round.encrypted_url)
-  #   # yelp_array = Yelp -- (whatever it returns)
-  #   # yelp_array.each do |yelp_data|
-  #   #   Option.create(yelp_data)
-  #   # end
-  # end
 
   #get
+  # initial Contact inputs other contact info
   def new_contacts
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @contact = Contact.new
@@ -71,16 +65,19 @@ class PagesController < ApplicationController
   end
   
   #post
+  # additional contact objects are created, encrypted_ids are set, they are assigned to a round and an email is sent to them to go vote
   def create_contacts
     @contact = Contact.new(params[:contact])
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @contact.set_encrypted_id
     @round.contacts << @contact
     @initial_contact_id = session[:initial_contact_id]
-  
+    @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
+
     respond_to do |format|
       if @contact.save
         ContactMailer.send_vote(@contact).deliver
+        ContactMailer.confirm(@initial_contact).deliver
         format.html { redirect_to vote_path(@initial_contact_id), notice: 'Contact was successfully created.' }
         format.json { render json: @contact, status: :created, location: @contact }
       else
@@ -90,10 +87,13 @@ class PagesController < ApplicationController
     end
   end
 
-  #get
+  # get
+  # displays all of the option data, as well as checkboxes for voting (for now - hope to add jquerymobile soon enough)
   def vote
     @vote = Vote.new
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
+    @round = @contact.round
+    @options = @round.options
     
     respond_to do |format|
       format.html # new.html.erb
@@ -101,7 +101,9 @@ class PagesController < ApplicationController
     end
   end
 
+  # post
   def create_vote
+    raise "#{params}"
     @vote = Vote.new(params[:vote])
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
     
@@ -120,6 +122,9 @@ class PagesController < ApplicationController
   #get
   def confirm
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
+    @round.contacts.each do |contact|
+      ContactMailer.decision(contact).deliver
+    end
   end
   
   def show_round
