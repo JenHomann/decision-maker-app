@@ -44,4 +44,4 @@ gem 'unicorn'
 # To use debugger
 # gem 'debugger'
 
-gem 'yelp'
+gem 'yelp', :git => 'https://github.com/Yelp/yelp-ruby.git', :branch => 'restrict_simple_oauth_version'

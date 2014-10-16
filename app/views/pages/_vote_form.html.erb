@@ -10,20 +10,12 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :points %><br />
-    <%= f.number_field :points %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_id %><br />
-    <%= f.number_field :contact_id %>
-  </div>
-  <div class="field">
-    <%= f.label :option_id %><br />
-    <%= f.number_field :option_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% @options.each do |option| %>
+    <p><%= link_to(option.name, option.url) %></p>
+    <p><%= image_tag(option.image) %></br>
+    <%= f.check_box(:response, {value: option.name}, "yes", "no")%> <-- check for yes</p>
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
