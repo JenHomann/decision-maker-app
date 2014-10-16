@@ -10,7 +10,7 @@
         <% end %>
     </p>
     <%= f.fields_for :votes do |v| %>
-      <%= v.check_box(:response, {value: option.name}, "yes", "no") %> <-- check for yes
+      <%= v.check_box(:response, {value: option.name}, "yes", "no") %> <-- check to vote yes
     <% end %>
   <% end %>
   <div class="actions">
