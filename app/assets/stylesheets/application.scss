@@ -1,9 +1,13 @@
 @import "foundation_and_overrides";
 
-nav.top-bar.title-area {
+nav.top-bar {
 text-align:center;
 }
 
 section.top-bar-section {
 display: inline-block;
+}
+
+.name a{
+  text-decoration: none;
 }
