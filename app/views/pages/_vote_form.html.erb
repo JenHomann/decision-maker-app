@@ -1,18 +1,12 @@
 <div class="row">
   <div class="medium-6 column">
 
-<%= form_for(@options, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
-  
-  <% @options.each do |option| %>
-    <p><%= link_to(option.name, option.url) %></p>
-    <p><% if option.image %>
-          <%= image_tag(option.image) %></br>
-        <% end %>
-    </p>
+<%= form_for(@contact, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
     <%= f.fields_for :votes do |v| %>
-      <%= v.check_box(:response, {value: option.name}, "yes", "no") %> <-- check to vote yes
+      <%= v.object.option.name %></br>
+      <%= image_tag(v.object.option.image) %></br>
+      <%= v.check_box(:response, {value: v.object.option.name}, "yes", "no") %> <-- check to vote yes</br>
     <% end %>
-  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

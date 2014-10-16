@@ -4,8 +4,6 @@ class Option < ActiveRecord::Base
   belongs_to :round
   has_many :votes
   
-  accepts_nested_attributes_for :votes, :allow_destroy => true
-  
   def self.create_options(location, term, round_id)
     @options = Yelp.client.search(location, {term: term})
     @options.businesses.each do |option|
