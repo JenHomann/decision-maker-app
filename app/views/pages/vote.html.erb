@@ -3,6 +3,8 @@
 <% @options.each do |option| %>
   <p><%= option.name %></br>
   <%= image_tag(option.image) %></p>
+  <%= check_box(option, response, {}, "yes", "no")%> <-- check for yes
+  <% vote = Vote.new %>
 <% end %>
 
 <%= render 'vote_form' %>

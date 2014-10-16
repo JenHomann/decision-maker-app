@@ -42,7 +42,6 @@ class PagesController < ApplicationController
       if @round.save
         @contact = Contact.find_by_encrypted_id(session[:initial_contact_id])
         @round.contacts << @contact
-        binding.pry
         Option.create_options(params[:round][:location], params[:round][:restaurant_type], @round.id)
         format.html { redirect_to new_contacts_path(@round.encrypted_url), notice: 'Round was successfully created.' }
         format.json { render json: @round, status: :created, location: @round }
@@ -52,20 +51,9 @@ class PagesController < ApplicationController
       end
     end
   end
-  
-  # #post
-  # def set_options
-  #   @option = Option.create(name: "Option A")
-  #   @option.round = Round.find_by_encrypted_url(params[:encrypted_url])
-  #
-  #   render new_contacts_path(@option.round.encrypted_url)
-  #   # yelp_array = Yelp -- (whatever it returns)
-  #   # yelp_array.each do |yelp_data|
-  #   #   Option.create(yelp_data)
-  #   # end
-  # end
 
   #get
+  # initial Contact inputs other contact info
   def new_contacts
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @contact = Contact.new
@@ -77,6 +65,7 @@ class PagesController < ApplicationController
   end
   
   #post
+  # additional contact objects are created, encrypted_ids are set, they are assigned to a round and an email is sent to them to go vote
   def create_contacts
     @contact = Contact.new(params[:contact])
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
@@ -84,8 +73,7 @@ class PagesController < ApplicationController
     @round.contacts << @contact
     @initial_contact_id = session[:initial_contact_id]
     @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
-    binding.pry
-  
+
     respond_to do |format|
       if @contact.save
         ContactMailer.send_vote(@contact).deliver
@@ -100,8 +88,8 @@ class PagesController < ApplicationController
   end
 
   # get
+  # displays all of the option data, as well as checkboxes for voting (for now - hope to add jquerymobile soon enough)
   def vote
-    binding.pry
     @vote = Vote.new
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
     @round = @contact.round
@@ -113,7 +101,9 @@ class PagesController < ApplicationController
     end
   end
 
+  # post
   def create_vote
+    raise "#{params}"
     @vote = Vote.new(params[:vote])
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
     
