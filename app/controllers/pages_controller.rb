@@ -71,20 +71,20 @@ class PagesController < ApplicationController
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @contact.set_encrypted_id
     @round.contacts << @contact
-    
-    @options = @round.options
-    @options.each do |o|
-      Vote.create(option_id: o.id, contact_id: @contact.id)
-    end
-    
-    @initial_contact_id = session[:initial_contact_id]
-    @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
-    @options.each do |o|
-      Vote.create(option_id: o.id, contact_id: @initial_contact_id)
-    end
 
     respond_to do |format|
       if @contact.save
+        @options = @round.options
+        @options.each do |o|
+          Vote.create!(option_id: o.id, contact_id: @contact.id)
+        end
+    
+        @initial_contact_id = session[:initial_contact_id]
+        @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
+        @options.each do |o|
+          Vote.create!(option_id: o.id, contact_id: @initial_contact.id)
+        end
+        
         ContactMailer.send_vote(@contact).deliver
         ContactMailer.confirm(@initial_contact).deliver
         format.html { redirect_to vote_path(@initial_contact_id), notice: 'Contact was successfully created.' }
@@ -118,7 +118,6 @@ class PagesController < ApplicationController
     
     respond_to do |format|
       if @vote.save
-        @vote.contact = @contact
         format.html { redirect_to confirm_path(@contact.round.encrypted_url), notice: 'Vote was successfully created.' }
         format.json { render json: @vote, status: :created, location: @vote }
       else

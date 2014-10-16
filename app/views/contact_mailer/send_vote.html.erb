@@ -2,4 +2,4 @@
 
 <p>Please click on the link below to view the options, and vote:</p>
 
-<p> <%= link_to "Click Here", vote_path(@contact.encrypted_id) %> </p>
+<p> Click to vote: <%= vote_url(@contact.encrypted_id)%></p>

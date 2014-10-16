@@ -16,6 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :restaurant_type %>
+    <%= f.text_field :restaurant_type %>
+  </div>
+  <div class="field">
     <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
@@ -23,10 +27,6 @@
     <%= f.label :price_range %><br />
     <%= f.text_field :price_range %>
   </div> -->
-  <div class="field">
-    <%= f.label :restaurant_type %>
-    <%= f.text_field :restaurant_type %>
-  </div>
   <div class="actions">
     <%= f.submit "Submit", class: "button radius"%>
   </div>
