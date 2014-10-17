@@ -17,18 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :restaurant_type %>
-    <%= f.text_field :restaurant_type %>
+    <%= f.select(:restaurant_type, options_for_select(["Fast Food", "American (Traditional)", "Mexican", "Pizza", "Burgers", "Sandwiches", "Bars" "American (New)", "Chinese", "Italian", "Chicken Wings", "Deli", "Barbeque", "Breakfast & Brunch", "Steakhouse", "Tex-Mex", "Sports Bar", "Cafe", "Diner", "Seafood", "Bakery", "Sushi"])) %>
   </div>
   <div class="field">
     <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
-  <!-- <div class="field">
-    <%= f.label :price_range %><br />
-    <%= f.text_field :price_range %>
-  </div> -->
   <div class="actions">
     <%= f.submit "Submit", class: "button radius"%>
   </div>
 <% end %>
-
