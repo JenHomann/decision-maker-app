@@ -154,16 +154,16 @@ class PagesController < ApplicationController
       end
       # determine a winner
       high_score = 0
-      @opions.each do |option|
+      @options.each do |option|
         if option.score > high_score
-          high_score = option_score
-          decision = option
+          high_score = option.score
+          @decision = option
         end
       end
-      @round.update_attributes(:decision => decision.id.to_s)
+      @round.update_attributes(:decision => @decision.id.to_s)
       # send confirmation email
       @round.contacts.each do |contact|
-        ContactMailer.decision(contact, decision).deliver
+        ContactMailer.decision(contact, @decision).deliver
       end
       redirect_to decision_path(@round.encrypted_url), :notice => "A decision has been made!"
     else
@@ -174,7 +174,7 @@ class PagesController < ApplicationController
   
   def decision
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
-    @decision = @round.decision
+    @decision = Option.find_by_id(@round.decision)
   end
   
   def no_decision
