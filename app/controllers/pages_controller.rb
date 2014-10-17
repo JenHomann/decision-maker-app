@@ -112,18 +112,23 @@ class PagesController < ApplicationController
 
   # post
   def create_vote
-    binding.pry
-    @vote = Vote.new(params[:vote])
+    @votes = params[:contact][:votes_attributes]
+    @votes.each do |v|
+      vote = Vote.find_by_id(v[1][:id])
+      vote.update_attributes(:response => v[1][:response])
+      vote.save
+      vote.assign_points
+    end
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
-    
+    binding.pry
     respond_to do |format|
-      if @vote.save
-        format.html { redirect_to confirm_path(@contact.round.encrypted_url), notice: 'Vote was successfully created.' }
+      # if @vote.save
+        format.html { redirect_to confirm_path(@contact.round.encrypted_url), notice: 'Votes were successfully saved.' }
         format.json { render json: @vote, status: :created, location: @vote }
-      else
-        format.html { render action: vote_path(@contact.encrypted_id) }
-        format.json { render json: @vote.errors, status: :unprocessable_entity }
-      end
+      # else
+      #   format.html { render action: vote_path(@contact.encrypted_id) }
+      #   format.json { render json: @vote.errors, status: :unprocessable_entity }
+      # end
     end
   end
   

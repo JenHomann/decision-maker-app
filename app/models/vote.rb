@@ -8,10 +8,10 @@ class Vote < ActiveRecord::Base
   # 
   # Returns the Vote object, with a points attribute saved
   def assign_points
-    if response == "yes"
-      points = 1
-    elsif response == "no"
-      points = 0
+    if self.response == "yes"
+      self.points = 1
+    elsif self.response == "no"
+      self.points = 0
     end
     self.save
   end
