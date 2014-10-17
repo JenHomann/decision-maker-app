@@ -57,8 +57,10 @@ class PagesController < ApplicationController
   # initial Contact inputs other contact info
   def new_contacts
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
-    @contact = @round.contacts.build
-
+    @round.contacts.build
+    @round.contacts.build
+    @round.contacts.build
+    
     respond_to do |format|
       format.html # new.html.erb
       format.js

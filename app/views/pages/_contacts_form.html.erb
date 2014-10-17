@@ -1,4 +1,4 @@
-<%= form_for(@round, method: :post, url: create_contacts_path(@round.encrypted_url), remote: true ) do |f| %>
+<%= form_for(@round, method: :post, url: create_contacts_path(@round.encrypted_url)) do |f| %>
   <% if @round.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@round.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -12,15 +12,12 @@
   <% end %>
   
   <%= f.fields_for :contacts do |c| %>
-    <div class="field">
-    <%= c.label :name %><br>
-    <%= c.text_field :name %>
-    </div>
-    <div class="field">
-      <%= c.label :email %><br>
-      <%= c.text_field :email%>
-    </div>
+    <%= render partial: "contact_fields", locals: { c: c } %>
   <% end %>
+  
+<!-- append the partial here when the link below is clicked -->
+  
+  <%= link_to("Add new contact", "#")%>
   
   <div class="actions">
   <%= f.submit "Submit", class: "button radius" %>
