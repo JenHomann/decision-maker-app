@@ -1,7 +1,7 @@
 $(document).ready(function(){
  
   $(".choice").each(function(e){
-    $(this).on("click", function(){
+    $(".choice").on("click", function(){
       $choice = $(this);
       $choice_text = $choice.text(); // Either "Yes" or "No".
       
