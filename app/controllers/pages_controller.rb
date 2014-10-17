@@ -42,7 +42,17 @@ class PagesController < ApplicationController
       if @round.save
         @contact = Contact.find_by_encrypted_id(session[:initial_contact_id])
         @round.contacts << @contact
+        
+        # options generated for the round
         Option.create_options(params[:round][:location], params[:round][:restaurant_type], @round.id)
+        @options = Option.where(round_id: @round.id)
+        # votes generated for initial contact
+        @contact = Contact.find_by_encrypted_id(session[:initial_contact_id])
+        
+        @options.each do |o|
+          Vote.create!(option_id: o.id, contact_id: @contact.id)
+        end
+        
         format.html { redirect_to new_contacts_path(@round.encrypted_url), notice: 'Round was successfully created.' }
         format.json { render json: @round, status: :created, location: @round }
       else
@@ -78,15 +88,13 @@ class PagesController < ApplicationController
         @options.each do |o|
           Vote.create!(option_id: o.id, contact_id: @contact.id)
         end
-    
+        
         @initial_contact_id = session[:initial_contact_id]
         @initial_contact = Contact.find_by_encrypted_id(@initial_contact_id)
-        @options.each do |o|
-          Vote.create!(option_id: o.id, contact_id: @initial_contact.id)
-        end
         
         ContactMailer.send_vote(@contact).deliver
         ContactMailer.confirm(@initial_contact).deliver
+        
         format.html { redirect_to vote_path(@initial_contact_id), notice: 'Contact was successfully created.' }
         format.json { render json: @contact, status: :created, location: @contact }
       else
