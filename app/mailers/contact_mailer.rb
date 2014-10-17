@@ -7,9 +7,10 @@ class ContactMailer < ActionMailer::Base
     mail(:to => "#{contact.name} <#{contact.email}>", :subject => "Grupl: Cast your vote!")
   end
   
-  def decision(contact)
+  def decision(contact, decision)
     @contact = contact
     @round = @contact.round
+    @decision = decision
     mail(:to => "#{contact.name} <#{contact.email}>", :subject => "Grupl: A decision has been made!")
   end
   
