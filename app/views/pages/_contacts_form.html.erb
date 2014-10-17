@@ -1,4 +1,4 @@
-<%= form_for(@round, method: :post, url: create_contacts_path(@round.encrypted_url), remote: true ) do |f| %>
+<%= form_for(@round, method: :post, url: create_contacts_path(@round.encrypted_url)) do |f| %>
   <% if @round.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@round.errors.count, "error") %> prohibited this contact from being saved:</h2>
