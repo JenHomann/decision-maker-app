@@ -4,6 +4,8 @@ class Vote < ActiveRecord::Base
   belongs_to :option
   belongs_to :contact
   
+  # after_update :assign_points
+  
   # Assigns an integer to points based on the user's response to each vote
   # 
   # Returns the Vote object, with a points attribute saved

@@ -1,5 +1,5 @@
 class Round < ActiveRecord::Base
-  attr_accessible :decision, :encrypted_url, :location, :name, :price_range, :restaurant_type
+  attr_accessible :decision, :encrypted_url, :location, :name, :price_range, :restaurant_type, :contacts_attributes, :decision_image, :decision_url
   
   require 'securerandom'
   
