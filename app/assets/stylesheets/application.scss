@@ -21,3 +21,95 @@ background-color: #105469;
   font-size: 1.85em;
   background-color: #105469;
 }
+
+
+
+// $yes-color: #56AE77; // option 1
+//$yes-color: #2ecc71; // option 2
+// $yes-color: #1abc9c; // option 3
+// $yes-color: #1abc9c; // option 4
+// $yes-color: #2ecc71; // option 5
+//  $yes-color: #2ecc71; // option 6
+ $yes-color: #abdb6c; // option 7
+
+
+
+// $no-color: #F08B76; // option 1
+// $no-color: #f1c40f; // option 2
+// $no-color: #f1c40f; // option 3
+// $no-color: #34495e; // option 4
+// $no-color: #34495e; // option 5
+// $no-color: #105469; // option 6
+ $no-color: #105469; // option 7
+
+
+
+.yes{
+  border-style: solid;
+  border-width: 3px;
+  cursor: pointer;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0 0 1.11111rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  display: inline-block;
+  padding-top: 0.88889rem;
+  padding-right: 1.77778rem;
+  padding-bottom: 0.94444rem;
+  padding-left: 1.77778rem;
+  font-size: 0.88889rem;
+  background-color: $yes-color;
+  border-color: $yes-color;
+  color: #fff;
+  font-size: 1.7em;
+  font-weight: bold;
+  border-top-right-radius: 1000px;
+  border-bottom-right-radius: 1000px;
+}
+
+.yes:hover{
+  background-color: #eee;
+  color:$yes-color;
+}
+
+.no{
+  border-style: solid;
+  border-width: 3px;
+  cursor: pointer;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0 0 1.11111rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  display: inline-block;
+  padding-top: 0.88889rem;
+  padding-right: 1.77778rem;
+  padding-bottom: 0.94444rem;
+  padding-left: 1.77778rem;
+  font-size: 0.88889rem;
+  background-color: $no-color;
+  border-color: $no-color;
+  color: #fff;
+  transition: all 0.5s ease;
+  font-size: 1.7em; 
+  font-weight: bold;
+  border-bottom-left-radius: 1000px;
+  border-top-left-radius: 1000px;
+}
+
+.no:hover{
+  background-color: #eee;
+  color: $no-color;
+  
+  
+  
+}

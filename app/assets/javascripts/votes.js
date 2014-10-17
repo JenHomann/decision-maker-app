@@ -18,4 +18,6 @@ $(document).ready(function(){
     $.ajax("/new_contacts.js");
   });
 
+
 });
+
