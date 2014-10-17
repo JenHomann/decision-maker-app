@@ -1,13 +1,38 @@
 <div class="row">
   <div class="medium-6 column">
 
-<%= form_for(@contact, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
-    <%= f.fields_for :votes do |v| %>
-      <%= v.object.option.name %></br>
-      <%= image_tag(v.object.option.image) %></br>
-      <%= v.check_box(:response, {value: v.object.option.name}, "yes", "no") %> <-- check to vote yes</br>
+    <%= form_for(@contact, method: :post, url: create_vote_path(@contact.encrypted_id)) do |f| %>
+      <%= f.fields_for :votes do |v| %>
+        <div class='option'>
+          <%= v.object.option.name %><br>
+          <%= image_tag(v.object.option.image) %><br>
+          <%= v.hidden_field(:response, value: "No") %> -- check to vote yes<br>
+          
+          <div class="vote_choices">
+            <div class="choice yes">Yes</div>
+            <div class="choice no">No</div>
+          </div>
+          
+          <style type="text/css" media="screen">
+          .yes, .no{
+            width: 50%;
+            padding: 20px;
+            float: left;
+          }
+          .yes{
+            background: green;
+          }
+          .no{
+            background: red;
+          }
+          </style>
+          
+        </div>
+      <% end %>
+      
+      <div class="actions">
+        <%= f.submit "Submit", class: "button radius" %>
+      </div>
     <% end %>
-  <div class="actions">
-    <%= f.submit "Submit", class: "button radius" %>
   </div>
-<% end %>
+</div>
