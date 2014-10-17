@@ -112,6 +112,7 @@ class PagesController < ApplicationController
 
   # post
   def create_vote
+    @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
     @votes = params[:contact][:votes_attributes]
     @votes.each do |v|
       vote = Vote.find_by_id(v[1][:id])
@@ -119,8 +120,10 @@ class PagesController < ApplicationController
       vote.save
       vote.assign_points
     end
-    @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
-    binding.pry
+    
+    @contact.update_attributes(:voted => true)
+    @contact.save
+    
     respond_to do |format|
       # if @vote.save
         format.html { redirect_to confirm_path(@contact.round.encrypted_url), notice: 'Votes were successfully saved.' }
@@ -135,12 +138,46 @@ class PagesController < ApplicationController
   #get
   def confirm
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
-    @round.contacts.each do |contact|
-      ContactMailer.decision(contact).deliver
+    @contacts = @round.contacts
+    voted_contacts = []
+    @contacts.each do |c|
+      if c.voted == true
+        voted_contacts << c
+      end
     end
+    
+    if voted_contacts.length == @contacts.length
+      @options = @round.options
+      @options.each do |o|
+        o.update_attributes(:score => Vote.tally_score(o.id))
+        o.save
+      end
+      # determine a winner
+      high_score = 0
+      @opions.each do |option|
+        if option.score > high_score
+          high_score = option_score
+          decision = option
+        end
+      end
+      @round.update_attributes(:decision => decision.id.to_s)
+      # send confirmation email
+      @round.contacts.each do |contact|
+        ContactMailer.decision(contact, decision).deliver
+      end
+      redirect_to decision_path(@round.encrypted_url), :notice => "A decision has been made!"
+    else
+      render no_decision_path, :alert => "No decision yet. We'll send you an email when a decision is made."
+    end
+    
   end
   
-  def show_round
+  def decision
+    @round = Round.find_by_encrypted_url(params[:encrypted_url])
+    @decision = @round.decision
+  end
+  
+  def no_decision
   end
   
 end

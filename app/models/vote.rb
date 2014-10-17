@@ -20,7 +20,7 @@ class Vote < ActiveRecord::Base
   # 
   # 
   def self.tally_score(option_id)
-    votes_array = Vote.where(option_id: 1)
+    votes_array = Vote.where(option_id: option_id)
     score = 0
     votes_array.each do |vote|
       score += vote.points
