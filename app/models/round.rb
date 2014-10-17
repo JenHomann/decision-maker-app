@@ -23,7 +23,7 @@ class Round < ActiveRecord::Base
   end
   
   def set_restaurant_type_options
-    return ["Fast Food", "American (Traditional)", "Mexican", "Pizza", "Burgers", "Sandwiches", "Bars" "American (New)", "Chinese", "Italian", "Chicken Wings", "Deli", "Barbeque", "Breakfast & Brunch", "Steakhouse", "Tex-Mex", "Sports Bar", "Cafe", "Diner", "Seafood", "Bakery", "Sushi"]
+    return ["Fast Food", "American (Traditional)", "Mexican", "Pizza", "Burgers", "Sandwiches", "Bars", "American (New)", "Chinese", "Italian", "Chicken Wings", "Deli", "Barbeque", "Breakfast & Brunch", "Steakhouse", "Tex-Mex", "Sports Bar", "Cafe", "Diner", "Seafood", "Bakery", "Sushi"]
   end
     
     # Afghan

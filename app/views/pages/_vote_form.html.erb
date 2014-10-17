@@ -6,7 +6,7 @@
         <div class='option'>
           <%= v.object.option.name %><br>
           <%= image_tag(v.object.option.image) %><br>
-          <%= v.hidden_field(:response, value: "No") %> -- check to vote yes<br>
+          <%= v.hidden_field(:response, value: "No", :class => "hidden_field") %><br>
           
           <div class="vote_choices">
             <div class="choice yes">Yes</div>

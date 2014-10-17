@@ -112,6 +112,7 @@ class PagesController < ApplicationController
 
   # post
   def create_vote
+    raise "#{params}"
     @contact = Contact.find_by_encrypted_id(params[:encrypted_id])
     @votes = params[:contact][:votes_attributes]
     @votes.each do |v|
