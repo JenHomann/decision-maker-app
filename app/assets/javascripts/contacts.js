@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 $(document).ready(function(){
   
-  $('.form').on('click', '.add_fields', function(event) {
+  $('form').on('click', '.add_fields', function(event) {
     var regexp, time;
     time = new Date().getTime();
     regexp = new RegExp($(this).data('id'), 'g');
