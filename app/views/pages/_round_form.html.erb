@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :restaurant_type %>
-    <%= f.select(:restaurant_type, options_for_select(["Fast Food", "American (Traditional)", "Mexican", "Pizza", "Burgers", "Sandwiches", "Bars" "American (New)", "Chinese", "Italian", "Chicken Wings", "Deli", "Barbeque", "Breakfast & Brunch", "Steakhouse", "Tex-Mex", "Sports Bar", "Cafe", "Diner", "Seafood", "Bakery", "Sushi"])) %>
+    <%= f.select(:restaurant_type, options_for_select(@round.set_restaurant_type_options)) %>
   </div>
   <div class="field">
     <%= f.label :location %>
