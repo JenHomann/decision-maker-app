@@ -12,5 +12,10 @@ $(document).ready(function(){
     
     $its_corresponding_option_div.hide();
   });
+  
+  $("#add_contact_field").on("click", function(e){
+    e.preventDefault;
+    $.ajax("/new_contacts.js");
+  });
 
 });

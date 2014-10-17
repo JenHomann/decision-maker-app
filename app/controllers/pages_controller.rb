@@ -61,7 +61,7 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @contact }
+      format.js
     end
   end
   
