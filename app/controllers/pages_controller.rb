@@ -135,7 +135,7 @@ class PagesController < ApplicationController
     end
   end
   
-  #get
+  # get
   def confirm
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @contacts = @round.contacts
@@ -167,7 +167,7 @@ class PagesController < ApplicationController
       end
       redirect_to decision_path(@round.encrypted_url), :notice => "A decision has been made!"
     else
-      render no_decision_path, :alert => "No decision yet. We'll send you an email when a decision is made."
+      redirect_to no_decision_path, :alert => "No decision yet. We'll send you an email when a decision is made."
     end
     
   end

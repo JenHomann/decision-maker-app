@@ -18,7 +18,7 @@ DecisionMakerApp::Application.routes.draw do
   
   get '/confirmation/:encrypted_url' => 'pages#confirm', as: 'confirm' # don't forget to pass the encrypted_url
   get '/decision/:encrypted_url' => 'pages#decision', as: 'decision' # don't forget to pass the encrypted_url
-  get '/no_decision' => 'pages#no_decision', as: 'no_decision' # don't forget to pass the encrypted_url
+  get '/no_decision' => 'pages#no_decision', as: 'no_decision'
   
   
   # get '/new/:id/task' => 'tasks#new', as: 'org_task'
