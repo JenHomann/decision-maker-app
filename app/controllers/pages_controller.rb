@@ -58,8 +58,6 @@ class PagesController < ApplicationController
   def new_contacts
     @round = Round.find_by_encrypted_url(params[:encrypted_url])
     @round.contacts.build
-    @round.contacts.build
-    @round.contacts.build
     
     respond_to do |format|
       format.html # new.html.erb
