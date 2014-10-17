@@ -5,7 +5,9 @@
       <%= f.fields_for :votes do |v| %>
         <div class='option'>
           <%= v.object.option.name %><br>
-          <%= image_tag(v.object.option.image) %><br>
+          <% if v.object.option.image %>
+            <%= image_tag(v.object.option.image) %><br>
+          <% end %>
           <%= v.hidden_field(:response, value: "No", :class => "hidden_field") %><br>
           
           <div class="vote_choices">
